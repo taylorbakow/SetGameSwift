@@ -32,32 +32,25 @@ struct DiamondView: View {
                 if(self.shading == .outlined){
                     ZStack{
                         DiamondShape().fill(Color.white)
-                            .frame(maxWidth: 50, maxHeight: 50)
                         DiamondShape().stroke(lineWidth: 4.0)
-                            .frame(maxWidth: 50, maxHeight: 50)
                     }
                 }else if(self.shading == .solid){
                     ZStack{
                         DiamondShape().fill(setColor)
-                            .frame(maxWidth: 50, maxHeight: 50)
                         DiamondShape().stroke(lineWidth: 4.0)
-                            .frame(maxWidth: 50, maxHeight: 50)
-                        
                     }
                 }else{
                     ZStack{
                         DiamondShape().opacity(0.5)
-                            .frame(maxWidth: 50, maxHeight: 50)
                         DiamondShape().stroke(lineWidth: 4.0)
-                            .frame(maxWidth: 50, maxHeight: 50)
                         
                     }
                 }
             }
         }
         .foregroundColor(setColor)
-        .aspectRatio(contentMode: .fit)
-        .padding(5)
+        .aspectRatio(5, contentMode: .fit)
+        .padding(10)
     }
     
     var setColor: Color {
@@ -74,6 +67,6 @@ struct DiamondView: View {
 
 struct DiamondView_Previews: PreviewProvider {
     static var previews: some View {
-        DiamondView(number: 3, color: .green, shading: .shaded)
+        DiamondView(number: 1, color: .green, shading: .shaded)
     }
 }

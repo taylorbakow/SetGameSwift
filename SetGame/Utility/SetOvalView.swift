@@ -26,30 +26,27 @@ struct SetOvalView: View {
                     ZStack{
                         Capsule()
                             .fill(Color.white)
-                            .frame(width: 30, height: 60)
                         Capsule()
                             .stroke(lineWidth: 4.0)
-                            .frame(width: 30, height: 60)
                     }
+                    .frame(maxWidth: 100)
                 }else if(self.shading == .solid){
                     ZStack{
                         Capsule().fill(setColor)
-                            .frame(width: 30, height: 60)
                         Capsule().stroke(lineWidth: 4.0)
-                            .frame(width: 30, height: 60)
                     }
+                    .frame(maxWidth: 100)
                 }else{
                     ZStack{
                         Capsule().opacity(0.5)
-                            .frame(width: 30, height: 60)
                         Capsule().stroke(lineWidth: 4.0)
-                            .frame(width: 30, height: 60)
                     }
+                    .frame(maxWidth: 100)
                 }
             }
         }
         .foregroundColor(setColor)
-        .aspectRatio(contentMode: .fit)
+        .aspectRatio(5, contentMode: .fit)
         .padding(5)
     }
     

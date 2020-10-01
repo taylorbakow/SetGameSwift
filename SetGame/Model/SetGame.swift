@@ -80,7 +80,7 @@ struct SetGame{
     
     mutating func dealMoreCards() {
         cardsDisplayed += 3
-        score -= 9
+        score -= 1
     }
     
     mutating func choose(card: Card) {
@@ -108,13 +108,12 @@ struct SetGame{
                 } else if isMatchingSet(cardSet: allSelectedIndices.map { cards[$0] }) {
                     allSelectedIndices.forEach({ cardIndex in cards[cardIndex].isMatched = true })
                     cards[currentSelectedIndex].isSelected = true
-                    score += 3
+                    score += 1
                 } else {
                     allSelectedIndices.forEach({ cardIndex in
                         cards[cardIndex].isMatched = false
                         cards[cardIndex].isSelected = true
                     })
-                    score -= 1
                 }
             } else if previousSelectedIndices.count == 3 {
                 if isMatchingSet(cardSet: previousSelectedIndices.map { cards[$0] }) {

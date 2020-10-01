@@ -60,31 +60,23 @@ struct SquiggleView: View {
                 if(self.shading == .outlined){
                     ZStack{
                         SquiggleShape().fill(Color.white)
-                            .frame(width: 30, height: 30)
                         SquiggleShape().stroke(lineWidth: 4.0)
-                            .frame(width: 30, height: 30)
                     }
                 }else if(self.shading == .solid){
                     ZStack{
                         SquiggleShape().fill(setColor)
-                            .frame(width: 30, height: 30)
                         SquiggleShape().stroke(lineWidth: 4.0)
-                            .frame(width: 30, height: 30)
-                        
                     }
                 }else{
                     ZStack{
                         SquiggleShape().opacity(0.3)
-                            .frame(width: 30, height: 30)
                         SquiggleShape().stroke(lineWidth: 4.0)
-                            .frame(width: 30, height: 30)
-                        
                     }
                 }
             }
         }
         .foregroundColor(setColor)
-        .aspectRatio(contentMode: .fit)
+        .aspectRatio(5, contentMode: .fit)
         .padding(5)
     }
     
@@ -102,6 +94,6 @@ struct SquiggleView: View {
 
 struct SquiggleView_Previews: PreviewProvider {
     static var previews: some View {
-        SquiggleView(number: 1, color: .green, shading: .shaded)
+        SquiggleView(number: 2, color: .green, shading: .shaded)
     }
 }

@@ -23,7 +23,8 @@ struct CardView: View {
         let cardContent = getShape()
         return ZStack {
             cardContent
-       }
+        }
+        .aspectRatio(3, contentMode: .fit)
     }
     
     private var strokeColor: Color {
@@ -87,6 +88,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: SetGame.Card.init(id: 1, shape: .diamond, color: SetColor.green, shading: .outlined, number: 2))
+        CardView(card: SetGame.Card.init(id: 1, shape: .diamond, color: SetColor.green, shading: .outlined, number: 3))
     }
 }
