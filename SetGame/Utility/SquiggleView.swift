@@ -60,21 +60,32 @@ struct SquiggleView: View {
                 if(self.shading == .outlined){
                     ZStack{
                         SquiggleShape().fill(Color.white)
-                        SquiggleShape().opacity(setShading)
+                            .frame(width: 30, height: 30)
                         SquiggleShape().stroke(lineWidth: 4.0)
+                            .frame(width: 30, height: 30)
+                    }
+                }else if(self.shading == .solid){
+                    ZStack{
+                        SquiggleShape().fill(setColor)
+                            .frame(width: 30, height: 30)
+                        SquiggleShape().stroke(lineWidth: 4.0)
+                            .frame(width: 30, height: 30)
+                        
                     }
                 }else{
                     ZStack{
-                        SquiggleShape().fill(setColor)
-                        SquiggleShape().opacity(setShading)
+                        SquiggleShape().opacity(0.3)
+                            .frame(width: 30, height: 30)
                         SquiggleShape().stroke(lineWidth: 4.0)
+                            .frame(width: 30, height: 30)
+                        
                     }
                 }
             }
         }
         .foregroundColor(setColor)
         .aspectRatio(contentMode: .fit)
-        .padding(number == 1 ? 130 : number == 2 ? 90 : 60)
+        .padding(5)
     }
     
     var setColor: Color {
@@ -87,22 +98,10 @@ struct SquiggleView: View {
                return Color.purple
            }
        }
-
-   var setShading: Double {
-       switch(shading) {
-       case .solid:
-           return 0.0
-       case .shaded:
-           return 0.5
-       case .outlined:
-           return 0.0
-       }
-   }
-
 }
 
 struct SquiggleView_Previews: PreviewProvider {
     static var previews: some View {
-        SquiggleView(number: 2, color: .green, shading: .shaded)
+        SquiggleView(number: 1, color: .green, shading: .shaded)
     }
 }

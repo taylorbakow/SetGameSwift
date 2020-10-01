@@ -6,15 +6,15 @@ import SwiftUI
 struct DiamondShape: Shape{
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: 25, y: -25))
-        path.addLine(to: CGPoint(x: 50, y: 0))
-        path.addLine(to: CGPoint(x: 25, y: 25))
-        path.addLine(to: CGPoint(x: 0, y: 0))
+            path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+            path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
         return path
     }
-        
 }
+
 
 struct DiamondView: View {
     var number: Int
@@ -27,26 +27,37 @@ struct DiamondView: View {
     }
     
     var body: some View {
-        HStack {
+        HStack{
             ForEach(0..<number) { number in
                 if(self.shading == .outlined){
                     ZStack{
                         DiamondShape().fill(Color.white)
-                        DiamondShape().opacity(setShading)
+                            .frame(maxWidth: 50, maxHeight: 50)
                         DiamondShape().stroke(lineWidth: 4.0)
+                            .frame(maxWidth: 50, maxHeight: 50)
+                    }
+                }else if(self.shading == .solid){
+                    ZStack{
+                        DiamondShape().fill(setColor)
+                            .frame(maxWidth: 50, maxHeight: 50)
+                        DiamondShape().stroke(lineWidth: 4.0)
+                            .frame(maxWidth: 50, maxHeight: 50)
+                        
                     }
                 }else{
                     ZStack{
-                        DiamondShape().fill(setColor)
-                        DiamondShape().opacity(setShading)
+                        DiamondShape().opacity(0.5)
+                            .frame(maxWidth: 50, maxHeight: 50)
                         DiamondShape().stroke(lineWidth: 4.0)
+                            .frame(maxWidth: 50, maxHeight: 50)
+                        
                     }
                 }
             }
         }
         .foregroundColor(setColor)
         .aspectRatio(contentMode: .fit)
-        .padding(number == 1 ? 130 : number == 2 ? 90 : 60)
+        .padding(5)
     }
     
     var setColor: Color {
@@ -59,22 +70,10 @@ struct DiamondView: View {
                return Color.purple
            }
        }
-
-   var setShading: Double {
-       switch(shading) {
-       case .solid:
-           return 0.0
-       case .shaded:
-           return 0.5
-       case .outlined:
-           return 0.0
-       }
-   }
-    
 }
 
 struct DiamondView_Previews: PreviewProvider {
     static var previews: some View {
-        DiamondView(number: 2, color: .green, shading: .shaded)
+        DiamondView(number: 3, color: .green, shading: .shaded)
     }
 }

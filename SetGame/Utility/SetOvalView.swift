@@ -6,7 +6,7 @@ import SwiftUI
 struct SetOvalShape: View{
     var body: some View {
         Capsule()
-            .frame(width: 30, height: 80)
+            .frame(width: 30, height: 60)
     }
 }
 
@@ -25,24 +25,32 @@ struct SetOvalView: View {
                 if(self.shading == .outlined){
                     ZStack{
                         Capsule()
-                            .fill(Color.white).frame(width: 30, height: 80)
-                        Capsule().opacity(setShading).frame(width: 30, height: 80)
-                        Capsule().stroke(lineWidth: 4.0).frame(width: 30, height: 80)
+                            .fill(Color.white)
+                            .frame(width: 30, height: 60)
+                        Capsule()
+                            .stroke(lineWidth: 4.0)
+                            .frame(width: 30, height: 60)
                     }
-                    
+                }else if(self.shading == .solid){
+                    ZStack{
+                        Capsule().fill(setColor)
+                            .frame(width: 30, height: 60)
+                        Capsule().stroke(lineWidth: 4.0)
+                            .frame(width: 30, height: 60)
+                    }
                 }else{
                     ZStack{
-                        Capsule().fill(setColor).frame(width: 30, height: 80)
-                        Capsule().opacity(setShading).frame(width: 30, height: 80)
-                        Capsule().stroke(lineWidth: 4.0).frame(width: 30, height: 80)
-
+                        Capsule().opacity(0.5)
+                            .frame(width: 30, height: 60)
+                        Capsule().stroke(lineWidth: 4.0)
+                            .frame(width: 30, height: 60)
                     }
                 }
             }
         }
         .foregroundColor(setColor)
         .aspectRatio(contentMode: .fit)
-        .padding(number == 1 ? 130 : number == 2 ? 90 : 60)
+        .padding(5)
     }
     
     var setColor: Color {
@@ -55,21 +63,10 @@ struct SetOvalView: View {
                return Color.purple
            }
        }
-
-   var setShading: Double {
-       switch(shading) {
-       case .solid:
-           return 0.0
-       case .shaded:
-           return 0.5
-       case .outlined:
-           return 0.0
-       }
-   }
 }
 
 struct SetOvalView_Previews: PreviewProvider {
     static var previews: some View {
-        SetOvalView(number: 3, color: .green, shading: .shaded)
+        SetOvalView(number: 2, color: .green, shading: .shaded)
     }
 }

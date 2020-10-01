@@ -12,14 +12,18 @@ class SetGameController: ObservableObject {
 
     
     static func createGame() -> SetGame {
-        SetGame()
+        return SetGame()
     }
     
     var cards: Array<SetGame.Card> {
         game.cards
     }
     
-    var cardsDisplayed: Array<SetGame.Card> {
+    var displayedCards: Array<SetGame.Card> {
+        game.displayedCards
+    }
+    
+    var cardsDisplayed: Int{
         game.cardsDisplayed
     }
     
@@ -27,20 +31,12 @@ class SetGameController: ObservableObject {
         game.score
     }
 
-    func select(card: SetGame.Card) {
-        game.choose()
+    func choose(_ card: SetGame.Card) {
+        game.choose(card: card)
     }
 
-//    func dealCards() {
-//        game?.dealCards()
-//    }
-    
-    func createSetGame() {
-        game = SetGame()
-    }
-    
-    func resetSetGame() {
-        game = SetGame()
+    func dealMoreCards() {
+        game.dealMoreCards()
     }
 }
 

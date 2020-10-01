@@ -23,16 +23,23 @@ struct SetGameView: View {
            VStack {
                 GeometryReader { geometry in
                     LazyVGrid(columns: columns(for: geometry.size)){
-                        ForEach(game.cardsDisplayed) { card in
+                        ForEach(game.displayedCards) { card in
                             CardView(card: card)
                                 .onTapGesture {
-                                    game.select(card: card)
+                                    game.choose(card)
                                 }
                         }
                     }
+                    .padding()
                     .foregroundColor(.blue)
                 }
                 HStack {
+                    Spacer()
+                    Button(action: {
+                        game.dealMoreCards()
+                    }) {
+                        Text("Deal Cards").foregroundColor(Color.black)
+                    }
                    Spacer()
                    Text("Score: \(game.score)")
                    Spacer()
@@ -43,7 +50,7 @@ struct SetGameView: View {
            }
        }
     
-    private let desiredCardWidth: CGFloat = 100
+    private let desiredCardWidth: CGFloat = 120
 }
 
 struct ContentView_Previews: PreviewProvider {

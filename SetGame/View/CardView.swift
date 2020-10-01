@@ -10,13 +10,13 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                    RoundedRectangle(cornerRadius: cardCornerRadius).fill(Color.white)
+                    RoundedRectangle(cornerRadius: cardCornerRadius).fill(fillColor)
                     createContent()
-                    RoundedRectangle(cornerRadius: cardCornerRadius).stroke()
+                    RoundedRectangle(cornerRadius: cardCornerRadius).stroke(strokeColor)
             }
         }
         .aspectRatio(2/3, contentMode: .fit)
-        .padding(5)
+        .padding(10)
     }
     
     private func createContent() -> some View{
@@ -25,6 +25,25 @@ struct CardView: View {
             cardContent
        }
     }
+    
+    private var strokeColor: Color {
+         if card.isSelected {
+             return Color.black
+         }else{
+            return Color.gray
+         }
+     }
+     
+     private var fillColor: Color {
+        if card.isMatched && card.isSelected{
+            return Color.green
+        }else if card.isSelected && card.isMatched == false{
+            return Color.gray
+        }else{
+            return Color.clear
+        }
+     }
+    
     private func systemFont(for size: CGSize) -> Font {
         return Font.system(size: min(size.width, size.height) * fontScaleFactor)
     }
@@ -68,6 +87,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: SetGame.Card.init(id: 1, shape: .squiggle, color: SetColor.green, shading: .solid, number: 3))
+        CardView(card: SetGame.Card.init(id: 1, shape: .diamond, color: SetColor.green, shading: .outlined, number: 2))
     }
 }
