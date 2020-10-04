@@ -39,7 +39,7 @@ struct SquiggleShape: Shape {
         )
 
         return path.offsetBy(
-            dx: (rect.minX - path.boundingRect.minX + rect.width) / 2,
+            dx: rect.midX - path.boundingRect.midX,
             dy: rect.midY - path.boundingRect.midY
         )
     }
@@ -60,17 +60,17 @@ struct SquiggleView: View {
                 if(self.shading == .outlined){
                     ZStack{
                         SquiggleShape().fill(Color.white)
-                        SquiggleShape().stroke(lineWidth: 4.0)
+                        SquiggleShape().stroke(lineWidth: 3.0)
                     }
                 }else if(self.shading == .solid){
                     ZStack{
                         SquiggleShape().fill(setColor)
-                        SquiggleShape().stroke(lineWidth: 4.0)
+                        SquiggleShape().stroke(lineWidth: 1.0)
                     }
                 }else{
                     ZStack{
                         SquiggleShape().opacity(0.3)
-                        SquiggleShape().stroke(lineWidth: 4.0)
+                        SquiggleShape().stroke(lineWidth: 1.0)
                     }
                 }
             }

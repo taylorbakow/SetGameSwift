@@ -3,10 +3,36 @@
 
 import SwiftUI
 
-struct SetOvalShape: View{
-    var body: some View {
-        Capsule()
-            .frame(width: 30, height: 60)
+struct SetOvalShape: Shape{
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+//        path.move(to: CGPoint(x: rect.minX, y: rect.minX))
+//        path.addCurve(to: CGPoint(x: rect.maxX, y: rect.minY),
+//                      control1: CGPoint(x: rect.minX + (rect.maxX / 10), y: rect.maxY - (rect.maxY * 1.5)),
+//                      control2: CGPoint(x: rect.maxX - (rect.maxX / 10), y: rect.maxY - (rect.maxY * 1.5)))
+//        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY * 2))
+//        path.addCurve(to: CGPoint(x: rect.minX, y: rect.maxY * 2),
+//                      control1: CGPoint(x: rect.maxX - (rect.maxX / 10), y: rect.maxY + (rect.maxY * 1.5)),
+//                      control2: CGPoint(x: rect.minX + (rect.maxX / 10), y: rect.maxY + (rect.maxY * 1.5)))
+//        path.addLine(to: CGPoint(x: rect.minX, y: rect.minX))
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addCurve(to: CGPoint(x: 200, y: 0),
+                              control1: CGPoint(x: 20, y: -80), control2: CGPoint(x: 180, y: -80))
+        path.addLine(to: CGPoint(x: 200, y: 400))
+        path.addCurve(to: CGPoint(x: 0, y: 400),
+                              control1: CGPoint(x: 180, y: 480), control2: CGPoint(x: 20, y: 480))
+        path.addLine(to: CGPoint(x: 0, y: 0))
+
+        let scale: CGFloat = rect.height / path.boundingRect.height
+
+        path = path.applying(
+            CGAffineTransform(scaleX: scale, y: scale)
+        )
+
+        return path.offsetBy(
+            dx: rect.midX - path.boundingRect.midX,
+            dy: rect.midY - path.boundingRect.midY
+        )
     }
 }
 
@@ -20,33 +46,30 @@ struct SetOvalView: View {
         self.shading = shading
     }
     var body: some View {
-        HStack {
+        HStack{
             ForEach(0..<number) { number in
                 if(self.shading == .outlined){
                     ZStack{
-                        Capsule()
-                            .fill(Color.white)
-                        Capsule()
-                            .stroke(lineWidth: 4.0)
+                        SetOvalShape().fill(Color.white)
+                        SetOvalShape().stroke(lineWidth: 3.0)
                     }
-                    .frame(maxWidth: 100)
                 }else if(self.shading == .solid){
                     ZStack{
-                        Capsule().fill(setColor)
-                        Capsule().stroke(lineWidth: 4.0)
+                        SetOvalShape().fill(setColor)
+                        SetOvalShape().stroke(lineWidth: 1.0)
                     }
-                    .frame(maxWidth: 100)
                 }else{
                     ZStack{
-                        Capsule().opacity(0.5)
-                        Capsule().stroke(lineWidth: 4.0)
+                        SetOvalShape().opacity(0.5)
+                        SetOvalShape().stroke(lineWidth: 1.0)
+                            
+                        
                     }
-                    .frame(maxWidth: 100)
                 }
             }
         }
         .foregroundColor(setColor)
-        .aspectRatio(5, contentMode: .fit)
+        .aspectRatio(3, contentMode: .fit)
         .padding(5)
     }
     
@@ -64,6 +87,6 @@ struct SetOvalView: View {
 
 struct SetOvalView_Previews: PreviewProvider {
     static var previews: some View {
-        SetOvalView(number: 2, color: .green, shading: .shaded)
+        SetOvalView(number: 3, color: .green, shading: .solid)
     }
 }
