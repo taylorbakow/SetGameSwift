@@ -2,7 +2,7 @@
 //  SetGameApp.swift
 //  SetGame
 //
-//  Created by Student on 9/20/20.
+//  Created by Taylor Bakow on 9/20/20.
 //
 
 import SwiftUI

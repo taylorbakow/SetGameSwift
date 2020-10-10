@@ -1,5 +1,3 @@
-//
-//  SquiggleView.swift
 
 import SwiftUI
 
@@ -62,8 +60,6 @@ struct SetOvalView: View {
                     ZStack{
                         SetOvalShape().opacity(0.5)
                         SetOvalShape().stroke(lineWidth: 1.0)
-                            
-                        
                     }
                 }
             }

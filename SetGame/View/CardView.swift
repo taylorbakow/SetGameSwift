@@ -1,5 +1,9 @@
 //
 //  CardView.swift
+//  SetGame
+//
+//  Created by Taylor Bakow on 9/20/20.
+//
 
 import SwiftUI
 
@@ -15,7 +19,7 @@ struct CardView: View {
                     RoundedRectangle(cornerRadius: cardCornerRadius).stroke(strokeColor)
             }
         }
-        .aspectRatio(2/3, contentMode: .fit)
+        .aspectRatio(4/5, contentMode: .fit)
         .padding(10)
     }
     
@@ -36,7 +40,7 @@ struct CardView: View {
      
      private var fillColor: Color {
         if card.isMatched && card.isSelected{
-            return Color.green
+            return Color.yellow
         }else if card.isSelected && card.isMatched == false{
             return Color.gray
         }else{

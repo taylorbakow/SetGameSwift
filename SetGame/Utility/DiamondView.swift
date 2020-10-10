@@ -1,5 +1,3 @@
-//
-//  SquiggleView.swift
 
 import SwiftUI
 

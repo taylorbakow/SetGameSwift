@@ -1,8 +1,8 @@
 //
-//  SetGameController.swift
+//  ContentView.swift
 //  SetGame
 //
-//  Created by Student on 9/20/20.
+//  Created by Taylor Bakow on 9/20/20.
 //
 
 import SwiftUI
@@ -37,6 +37,11 @@ class SetGameController: ObservableObject {
 
     func dealMoreCards() {
         game.dealMoreCards()
+    }
+    
+    func startNewGame() {
+        game.cards = Array<SetGame.Card>()
+        game = SetGameController.createGame()
     }
 }
 

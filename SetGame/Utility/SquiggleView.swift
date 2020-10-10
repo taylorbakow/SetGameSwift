@@ -94,6 +94,6 @@ struct SquiggleView: View {
 
 struct SquiggleView_Previews: PreviewProvider {
     static var previews: some View {
-        SquiggleView(number: 2, color: .green, shading: .shaded)
+        SquiggleView(number: 2, color: .purple, shading: .shaded)
     }
 }
