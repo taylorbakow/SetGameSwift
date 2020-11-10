@@ -40,7 +40,6 @@ class SetGameController: ObservableObject {
     }
     
     func startNewGame() {
-        game.cards = Array<SetGame.Card>()
         game = SetGameController.createGame()
     }
 }
